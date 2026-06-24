@@ -56,6 +56,9 @@ svg {
   display: block;
   max-width: 100%;
 }
+canvas {
+  max-width: 100%;
+}
 ul {
   list-style: none;
 }
@@ -173,6 +176,7 @@ th .info-tooltip::after {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-width: 0;
 }
 .navbar-brand {
   display: flex;
@@ -181,6 +185,8 @@ th .info-tooltip::after {
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-primary);
+  min-width: 0;
+  white-space: nowrap;
 }
 .navbar-brand img {
   width: 32px;
@@ -284,6 +290,11 @@ th .info-tooltip::after {
   color: var(--accent-gold);
   font-weight: 500;
   font-size: 0.875rem;
+  min-width: 0;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ── Page Wrapper ─────────────────────────────────────────────── */
@@ -652,7 +663,9 @@ input[type='range']::-webkit-slider-thumb:hover {
 
 /* ── Tables ───────────────────────────────────────────────────── */
 .table-wrapper {
+  max-width: 100%;
   overflow-x: auto;
+  contain: paint;
   border-radius: var(--radius-card);
 }
 table {
@@ -1518,6 +1531,7 @@ footer {
   }
   .navbar-brand {
     flex-shrink: 0;
+    font-size: 1.05rem;
   }
   .navbar-links {
     gap: 0.5rem;
@@ -1525,7 +1539,17 @@ footer {
     min-width: 0;
   }
   #nav-username {
-    display: none !important;
+    max-width: 92px;
+    padding: 0 2px !important;
+    font-size: 0.8rem !important;
+  }
+  .settings-dropdown {
+    position: fixed;
+    top: 64px;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    max-width: none;
   }
   .hero {
     min-height: auto;
@@ -1574,6 +1598,16 @@ footer {
     margin: 0 -0.25rem;
     padding-bottom: 0.25rem;
   }
+  .info-tooltip::after,
+  th .info-tooltip::after {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    top: auto;
+    bottom: 1rem;
+    width: auto;
+    transform: none;
+  }
   #toast-container {
     right: 1rem;
     left: 1rem;
@@ -1582,6 +1616,18 @@ footer {
   .toast {
     max-width: none;
   }
+  #dashboard-content {
+    padding: 1.25rem 0 2.5rem !important;
+  }
+  .dashboard-grid,
+  .dashboard-left,
+  .dashboard-right {
+    gap: 1rem;
+  }
+  .dashboard-grid,
+  .stats-grid {
+    margin-bottom: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1589,15 +1635,19 @@ footer {
     padding: 0 0.75rem;
   }
   .navbar-brand {
-    gap: 0;
-    font-size: 0;
+    gap: 8px;
+    font-size: 0.95rem;
   }
   .navbar-brand img {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
   }
   .navbar-links {
     gap: 0.4rem;
+  }
+  #nav-username {
+    max-width: 88px;
+    font-size: 0.76rem !important;
   }
   .btn-nav,
   .settings-toggle,
@@ -1605,8 +1655,41 @@ footer {
     padding: 6px 10px !important;
     font-size: 0.78rem !important;
   }
+  .settings-toggle {
+    min-width: 34px;
+  }
   .settings-dropdown {
-    width: min(260px, calc(100vw - 1.5rem));
+    top: 64px;
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+    padding: 0.85rem;
+  }
+  .settings-action {
+    padding: 10px;
+  }
+  #dashboard-content {
+    padding: 0.85rem 0 2rem !important;
+  }
+  #dashboard-content .container {
+    padding: 0 0.75rem;
+  }
+  .dashboard-grid,
+  .dashboard-left,
+  .dashboard-right {
+    gap: 0.8rem;
+  }
+  .stats-grid {
+    gap: 0.75rem;
+  }
+  .stat-card {
+    padding: 1rem;
+  }
+  .allocation-chart-grid {
+    gap: 0.75rem !important;
+  }
+  .allocation-chart-grid > div:first-child {
+    max-width: 220px !important;
   }
   .stats-grid {
     grid-template-columns: 1fr;
@@ -1693,6 +1776,26 @@ footer {
   }
   footer {
     padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar-brand {
+    gap: 6px;
+    font-size: 0.85rem;
+  }
+  .navbar-brand img {
+    width: 26px;
+    height: 26px;
+  }
+  #nav-username {
+    max-width: 58px;
+  }
+  .btn-nav,
+  .settings-toggle,
+  .btn-lang {
+    padding: 5px 8px !important;
+    font-size: 0.72rem !important;
   }
 }
 
@@ -1838,6 +1941,17 @@ footer {
 @media (max-width: 768px) {
   [dir='rtl'] .navbar-links {
     gap: 0.5rem;
+  }
+  [dir='rtl'] .settings-dropdown {
+    left: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  [dir='rtl'] .settings-dropdown {
+    left: 0.75rem;
+    right: 0.75rem;
   }
 }
 
