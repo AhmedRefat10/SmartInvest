@@ -41,6 +41,7 @@ body {
   font-weight: 500;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 a {
   color: var(--accent-gold);
@@ -53,6 +54,7 @@ a:hover {
 img,
 svg {
   display: block;
+  max-width: 100%;
 }
 ul {
   list-style: none;
@@ -639,11 +641,13 @@ input[type='range']::-webkit-slider-thumb:hover {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  min-width: 0;
 }
 .dashboard-right {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  min-width: 0;
 }
 
 /* ── Tables ───────────────────────────────────────────────────── */
@@ -653,6 +657,7 @@ input[type='range']::-webkit-slider-thumb:hover {
 }
 table {
   width: 100%;
+  min-width: 900px;
   border-collapse: collapse;
   font-size: 0.875rem;
 }
@@ -1433,6 +1438,8 @@ td {
 .legend-name {
   flex: 1;
   color: var(--text-primary);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .legend-weight {
   font-weight: 600;
@@ -1474,6 +1481,9 @@ footer {
 
 /* ── Responsive ───────────────────────────────────────────────── */
 @media (max-width: 1024px) {
+  .hero-layout {
+    gap: 2.5rem !important;
+  }
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
@@ -1500,8 +1510,31 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+  .navbar-inner {
+    gap: 1rem;
+  }
+  .navbar-brand {
+    flex-shrink: 0;
+  }
+  .navbar-links {
+    gap: 0.5rem;
+    justify-content: flex-end;
+    min-width: 0;
+  }
+  #nav-username {
+    display: none !important;
+  }
   .hero {
+    min-height: auto;
     padding: 2rem 0;
+  }
+  .hero-layout,
+  .allocation-chart-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
   }
   .hero-grid {
     grid-template-columns: 1fr;
@@ -1530,17 +1563,94 @@ footer {
   .sim-results {
     grid-template-columns: 1fr;
   }
+  .sim-control label {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
   .navbar-links .nav-link {
     display: none;
+  }
+  .table-wrapper {
+    margin: 0 -0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  #toast-container {
+    right: 1rem;
+    left: 1rem;
+    bottom: 1rem;
+  }
+  .toast {
+    max-width: none;
   }
 }
 
 @media (max-width: 480px) {
+  .navbar {
+    padding: 0 0.75rem;
+  }
+  .navbar-brand {
+    gap: 0;
+    font-size: 0;
+  }
+  .navbar-brand img {
+    width: 30px;
+    height: 30px;
+  }
+  .navbar-links {
+    gap: 0.4rem;
+  }
+  .btn-nav,
+  .settings-toggle,
+  .btn-lang {
+    padding: 6px 10px !important;
+    font-size: 0.78rem !important;
+  }
+  .settings-dropdown {
+    width: min(260px, calc(100vw - 1.5rem));
+  }
   .stats-grid {
     grid-template-columns: 1fr;
   }
+  .stats-bar-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .hero {
+    padding: 2rem 0 2.5rem;
+  }
+  .hero-badge {
+    max-width: 100%;
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    text-align: center;
+  }
+  .hero-subtitle {
+    margin: 0.75rem 0 1.5rem;
+    font-size: 1rem;
+  }
   .hero-ctas {
     flex-direction: column;
+  }
+  .hero-points {
+    gap: 0.5rem;
+  }
+  .explain-section,
+  .methodology-section,
+  .metrics-section,
+  .limitations-section,
+  .features,
+  .how-it-works {
+    padding: 3rem 0;
+  }
+  .section-header {
+    margin-bottom: 2rem;
+  }
+  .info-panel,
+  .method-step,
+  .metric-item,
+  .feature-card,
+  .limitations-box {
+    padding: 1rem;
   }
   .btn-lg {
     width: 100%;
@@ -1550,6 +1660,39 @@ footer {
   }
   .card {
     padding: 1rem;
+  }
+  .stat-value {
+    font-size: 1.35rem;
+  }
+  .form-label .helper {
+    display: block;
+    margin-left: 0;
+    margin-top: 2px;
+  }
+  .quiz-nav {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  .quiz-nav .btn {
+    flex: 1 1 120px;
+  }
+  .legend-row {
+    flex-wrap: wrap;
+  }
+  .legend-weight,
+  .legend-amount {
+    min-width: auto;
+  }
+  #loading-overlay {
+    padding: 1rem;
+  }
+  .loading-steps {
+    width: 100%;
+    max-width: 280px;
+  }
+  footer {
+    padding: 1.5rem 1rem;
   }
 }
 
