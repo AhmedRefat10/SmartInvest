@@ -1,0 +1,110 @@
+{% extends "base.html" %} {% block title %}Account Settings — SmartInvest{%
+endblock %} {% block content %}
+<div class="profile-page">
+  <div class="container">
+    <div class="card profile-card">
+      <h2 style="margin-bottom: 0.4rem" data-i18n="account_title">
+        Account Settings
+      </h2>
+      <p
+        style="color: #8892a4; margin-bottom: 2rem; font-size: 0.9rem"
+        data-i18n="account_subtitle"
+      >
+        Update your name, email, or password.
+      </p>
+
+      <form id="account-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="account-name" data-i18n="reg_name">
+            Full Name
+          </label>
+          <input
+            type="text"
+            id="account-name"
+            class="form-control"
+            autocomplete="name"
+            required
+          />
+          <div class="form-error" id="account-name-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="account-email" data-i18n="login_email">
+            Email Address
+          </label>
+          <input
+            type="email"
+            id="account-email"
+            class="form-control"
+            autocomplete="email"
+            required
+          />
+          <div class="form-error" id="account-email-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-label"
+            for="current-password"
+            data-i18n="account_current_password"
+          >
+            Current Password
+          </label>
+          <input
+            type="password"
+            id="current-password"
+            class="form-control"
+            autocomplete="current-password"
+            data-i18n-placeholder="account_current_password_ph"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-label"
+            for="new-password"
+            data-i18n="account_new_password"
+          >
+            New Password
+          </label>
+          <input
+            type="password"
+            id="new-password"
+            class="form-control"
+            autocomplete="new-password"
+            data-i18n-placeholder="account_new_password_ph"
+          />
+          <div class="form-error" id="new-password-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-label"
+            for="confirm-password"
+            data-i18n="account_confirm_password"
+          >
+            Confirm New Password
+          </label>
+          <input
+            type="password"
+            id="confirm-password"
+            class="form-control"
+            autocomplete="new-password"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="width: 100%; margin-top: 0.75rem"
+        >
+          <span class="btn-text" data-i18n="account_save">Save Account</span>
+          <span class="spinner"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/account.js') }}"></script>
+{% endblock %}

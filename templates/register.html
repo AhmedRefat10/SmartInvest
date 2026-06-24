@@ -1,0 +1,132 @@
+{% extends "base.html" %} {% block title %}Register — SmartInvest{% endblock %}
+{% block content %}
+<div class="auth-page">
+  <div class="card auth-card">
+    <div class="auth-header">
+      <h2 data-i18n="reg_title">Create Your Account</h2>
+      <p data-i18n="reg_subtitle">
+        Join SmartInvest and start investing smarter today.
+      </p>
+    </div>
+
+    <form id="register-form" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="name" data-i18n="reg_name"
+          >Full Name</label
+        >
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          placeholder="e.g. Ahmed Hassan"
+          data-i18n-placeholder="reg_name_ph"
+          autocomplete="name"
+          required
+        />
+        <div class="form-error" id="name-error"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email" data-i18n="reg_email"
+          >Email Address</label
+        >
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="you@example.com"
+          data-i18n-placeholder="reg_email_ph"
+          autocomplete="email"
+          required
+        />
+        <div class="form-error" id="email-error"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password" data-i18n="reg_password"
+          >Password</label
+        >
+        <div class="password-toggle">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="At least 8 characters"
+            data-i18n-placeholder="reg_password_ph"
+            autocomplete="new-password"
+            required
+          />
+          <button
+            type="button"
+            class="toggle-eye"
+            data-target="password"
+            aria-label="Toggle password"
+          >
+            👁
+          </button>
+        </div>
+        <div class="pw-strength">
+          <div class="pw-strength-bar">
+            <div
+              class="pw-strength-fill"
+              id="pw-strength-fill"
+              style="width: 0%"
+            ></div>
+          </div>
+          <span class="pw-strength-text" id="pw-strength-text"></span>
+        </div>
+        <div class="form-error" id="password-error"></div>
+      </div>
+
+      <div class="form-group">
+        <label
+          class="form-label"
+          for="confirm-password"
+          data-i18n="reg_password"
+          >Confirm Password</label
+        >
+        <div class="password-toggle">
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            class="form-control"
+            placeholder="Repeat your password"
+            data-i18n-placeholder="reg_password_ph"
+            autocomplete="new-password"
+            required
+          />
+          <button
+            type="button"
+            class="toggle-eye"
+            data-target="confirm-password"
+            aria-label="Toggle confirm password"
+          >
+            👁
+          </button>
+        </div>
+        <div class="form-error" id="confirm-password-error"></div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        style="width: 100%; margin-top: 0.5rem"
+      >
+        <span class="btn-text" data-i18n="reg_submit">Create Account</span>
+        <span class="spinner"></span>
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <span data-i18n="reg_already">Already have an account?</span>
+      <a href="/login" data-i18n="reg_signin">Sign In</a>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

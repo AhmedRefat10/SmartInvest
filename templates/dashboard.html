@@ -1,0 +1,395 @@
+{% extends "base.html" %} {% block title %}Investment Dashboard — SmartInvest{%
+endblock %} {% block content %}
+<div style="padding: 2rem 0 4rem" id="dashboard-content">
+  <div class="container">
+    <!-- Dashboard Header -->
+    <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      "
+    >
+      <div>
+        <h2 style="margin-bottom: 0.25rem" data-i18n="dashboard_title">
+          Your Investment Dashboard
+        </h2>
+        <p
+          style="color: #8892a4; font-size: 0.875rem"
+          data-i18n="dashboard_subtitle"
+        >
+          Optimized portfolio based on your risk profile and live market data.
+        </p>
+      </div>
+      <div class="market-status" id="market-live-status" data-i18n="market_live_loading">
+        Live prices loading...
+      </div>
+    </div>
+
+    <!-- ── Section A: Stat Cards ───────────────────────────────── -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label" data-i18n="stat_capital_label">
+          Total Investment
+        </div>
+        <div class="stat-value" id="stat-capital">—</div>
+        <div class="stat-sub" data-i18n="stat_capital_sub">
+          Available Capital (EGP)
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label" data-i18n="stat_risk_label">Risk Profile</div>
+        <div class="stat-value" style="font-size: 1rem; padding-top: 4px">
+          <span id="stat-risk-value" class="badge">—</span>
+        </div>
+        <div class="stat-sub" data-i18n="stat_risk_sub">
+          Score-Based Classification
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">
+          <span data-i18n="stat_return_label">Historical Annual Return</span>
+          <span
+            class="info-tooltip"
+            data-tooltip-key="tip_hist_return"
+            >?</span>
+        </div>
+        <div class="stat-value text-success" id="stat-return">—</div>
+        <div class="stat-sub" data-i18n="stat_return_sub">
+          Annualized from recent price history
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">
+          <span data-i18n="stat_div_label">Diversification Score</span>
+          <span
+            class="info-tooltip"
+            data-tooltip-key="tip_diversification"
+            >?</span>
+        </div>
+        <div class="stat-value text-gold" id="stat-divScore">—</div>
+        <div class="stat-sub" data-i18n="stat_div_sub">
+          Out of 10 (sector & correlation)
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Section B: Two-Column Layout ───────────────────────── -->
+    <div class="dashboard-grid">
+      <!-- Left Column (60%) -->
+      <div class="dashboard-left">
+        <!-- Allocation Doughnut Chart -->
+        <div class="card">
+          <div class="card-title" data-i18n="chart_allocation">
+            Portfolio Allocation
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 1.5rem;
+              align-items: center;
+            "
+          >
+            <div
+              style="
+                position: relative;
+                max-width: 280px;
+                margin: 0 auto;
+                width: 100%;
+              "
+            >
+              <canvas id="allocation-chart"></canvas>
+            </div>
+            <div id="allocation-legend"></div>
+          </div>
+        </div>
+
+        <!-- Growth Simulation Chart -->
+        <div class="card">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 1rem;
+              padding-bottom: 0.75rem;
+              border-bottom: 1px solid #1e2d45;
+            "
+          >
+            <div>
+              <div
+                style="
+                  font-family: 'Playfair Display', serif;
+                  font-size: 1.1rem;
+                "
+                data-i18n="chart_growth"
+              >
+                Growth Simulation
+              </div>
+              <div
+                style="font-size: 0.8rem; color: #8892a4; margin-top: 2px"
+                data-i18n="chart_growth_sub"
+              >
+                Simple best / average / worst compounding scenarios
+              </div>
+            </div>
+          </div>
+          <div style="height: 280px">
+            <canvas id="simulation-chart"></canvas>
+          </div>
+        </div>
+      </div>
+      <!-- /dashboard-left -->
+
+      <!-- Right Column (40%) -->
+      <div class="dashboard-right">
+        <!-- Risk Breakdown -->
+        <div class="card">
+          <div class="card-title" data-i18n="risk_title">Risk Breakdown</div>
+          <div class="risk-metric">
+            <span>
+              <span class="risk-metric-label" data-i18n="risk_volatility"
+                >Annual Volatility</span
+              >
+              <span
+                class="info-tooltip"
+                data-tooltip-key="tip_volatility"
+                >?</span>
+            </span>
+            <span class="risk-metric-value" id="risk-volatility">—</span>
+          </div>
+          <div class="risk-metric">
+            <span>
+              <span class="risk-metric-label" data-i18n="risk_sharpe"
+                >Sharpe Ratio</span
+              >
+              <span
+                class="info-tooltip"
+                data-tooltip-key="tip_sharpe"
+                >?</span>
+            </span>
+            <span class="risk-metric-value" id="risk-sharpe">—</span>
+          </div>
+          <div class="risk-metric">
+            <span>
+              <span class="risk-metric-label" data-i18n="risk_category"
+                >Risk Category</span
+              >
+              <span
+                class="info-tooltip"
+                data-tooltip-key="tip_risk_category"
+                >?</span>
+            </span>
+            <span class="risk-metric-value" id="risk-level-text">—</span>
+          </div>
+          <p
+            style="
+              font-size: 0.82rem;
+              color: #8892a4;
+              margin-top: 1rem;
+              line-height: 1.6;
+            "
+            id="risk-description"
+          ></p>
+          <div class="confidence-bar" style="margin-top: 1rem">
+            <div class="confidence-bar-label" data-i18n="div_quality">
+              Diversification Quality
+            </div>
+            <div class="confidence-bar-track">
+              <div
+                class="confidence-bar-fill"
+                id="confidence-bar-fill"
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Asset Type Breakdown Chart -->
+        <div class="card">
+          <div class="card-title" data-i18n="asset_type_title">
+            Asset Class Weights
+          </div>
+          <div style="height: 160px">
+            <canvas id="asset-type-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Simulation Controls -->
+        <div class="card">
+          <div class="card-title" data-i18n="sim_title">
+            Simulation Controls
+          </div>
+
+          <div class="sim-control">
+            <label for="sim-years">
+              <span data-i18n="sim_years_label">Projection Years</span>
+              <span class="range-value" id="sim-years-display">10</span>
+            </label>
+            <input
+              type="range"
+              id="sim-years"
+              min="1"
+              max="30"
+              value="10"
+              step="1"
+            />
+          </div>
+
+          <div class="sim-control">
+            <label for="sim-monthly" data-i18n="sim_monthly_label"
+              >Monthly Contribution (EGP)</label
+            >
+            <input
+              type="number"
+              id="sim-monthly"
+              class="form-control"
+              placeholder="0"
+              min="0"
+              step="500"
+              value="0"
+            />
+          </div>
+
+          <div class="sim-control">
+            <label for="sim-inflation">
+              <span data-i18n="sim_inflation_label">Inflation Rate</span>
+            </label>
+            <span
+              class="info-tooltip"
+              data-tooltip-key="tip_inflation"
+              >?</span>
+            <input
+              type="number"
+              id="sim-inflation"
+              class="form-control"
+              placeholder="5"
+              min="0"
+              max="50"
+              step="0.5"
+              value="5"
+            />
+          </div>
+
+          <button
+            class="btn btn-primary"
+            style="width: 100%; margin-top: 0.75rem"
+            id="btn-recalculate"
+          >
+            <span class="btn-text" data-i18n="btn_recalculate"
+              >Recalculate Simulation</span
+            >
+            <span class="spinner"></span>
+          </button>
+          <p class="sim-assumptions" id="sim-assumptions"></p>
+
+          <!-- Simulation Final Values -->
+          <div class="sim-results">
+            <div class="sim-result-item">
+              <div class="sim-result-label" data-i18n="sim_best">Best Case</div>
+              <div class="sim-result-value best" id="sim-final-best">—</div>
+            </div>
+            <div class="sim-result-item">
+              <div class="sim-result-label" data-i18n="sim_avg">Average</div>
+              <div class="sim-result-value avg" id="sim-final-avg">—</div>
+            </div>
+            <div class="sim-result-item">
+              <div class="sim-result-label" data-i18n="sim_worst">
+                Worst Case
+              </div>
+              <div class="sim-result-value worst" id="sim-final-worst">—</div>
+            </div>
+            <div class="sim-result-item">
+              <div class="sim-result-label" data-i18n="sim_real">
+                Avg After Inflation
+              </div>
+              <div class="sim-result-value real" id="sim-final-real">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /dashboard-right -->
+    </div>
+    <!-- /dashboard-grid -->
+
+    <!-- ── Section C: Full Allocation Table ───────────────────── -->
+    <div class="card">
+      <div class="card-title" data-i18n="table_title">
+        Full Portfolio Allocation
+      </div>
+      <div class="table-wrapper">
+        <table id="allocation-table">
+          <thead>
+            <tr>
+              <th data-sort="asset_name" data-i18n="col_asset">Asset Name</th>
+              <th data-sort="asset_type" data-i18n="col_type">Type</th>
+              <th data-sort="sector" data-i18n="col_sector">Sector</th>
+              <th data-sort="amount_egp" data-i18n="col_amount">
+                Amount (EGP)
+              </th>
+              <th data-sort="weight_percent" data-i18n="col_weight">
+                Weight %
+              </th>
+              <th>
+                <span data-i18n="col_live_price">Live Price</span>
+                <span
+                  class="info-tooltip"
+                  data-tooltip-key="tip_live_price"
+                  >?</span>
+              </th>
+              <th>
+                <span data-i18n="col_today_change">Today</span>
+                <span
+                  class="info-tooltip"
+                  data-tooltip-key="tip_today_change"
+                  >?</span>
+              </th>
+              <th data-sort="expected_return">
+                <span data-i18n="col_return">Hist. Return %</span>
+                <span
+                  class="info-tooltip"
+                  data-tooltip-key="tip_hist_return"
+                  >?</span>
+              </th>
+              <th data-sort="volatility">
+                <span data-i18n="col_volatility">Volatility %</span>
+                <span
+                  class="info-tooltip"
+                  data-tooltip-key="tip_volatility"
+                  >?</span>
+              </th>
+              <th data-sort="liquidity_score">
+                <span data-i18n="col_liquidity">Liquidity</span>
+                <span
+                  class="info-tooltip"
+                  data-tooltip-key="tip_liquidity"
+                  >?</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="allocation-tbody">
+            <tr>
+              <td
+                colspan="10"
+                style="text-align: center; color: #8892a4; padding: 2rem"
+                data-i18n="table_loading"
+              >
+                Loading portfolio data…
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- /container -->
+</div>
+<!-- /dashboard-content -->
+{% endblock %} {% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulation.js') }}"></script>
+{% endblock %}

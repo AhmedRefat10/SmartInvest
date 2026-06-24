@@ -1,0 +1,76 @@
+{% extends "base.html" %} {% block title %}Risk Assessment Quiz — SmartInvest{%
+endblock %} {% block content %}
+<div style="padding: 3rem 1rem">
+  <div class="container">
+    <div class="quiz-container">
+      <!-- Step Indicator -->
+      <div class="step-indicator">
+        <div class="step-dot done"></div>
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+      </div>
+      <p
+        style="font-size: 0.8rem; color: #8892a4; margin-bottom: 1.5rem"
+        data-i18n="quiz_step"
+      >
+        Step 2 of 3 — Risk Assessment
+      </p>
+
+      <h2 style="margin-bottom: 0.25rem" data-i18n="quiz_title">
+        Risk Assessment Quiz
+      </h2>
+      <p
+        style="color: #8892a4; font-size: 0.9rem; margin-bottom: 1.5rem"
+        data-i18n="quiz_subtitle"
+      >
+        Answer all 15 questions honestly. Your responses are scored to determine
+        your personalized investor profile.
+      </p>
+
+      <!-- Progress Bar -->
+      <div class="progress-text">
+        <span id="question-counter" data-i18n="quiz_counter"
+          >Question 1 of 15</span
+        >
+      </div>
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          id="quiz-progress-fill"
+          style="width: 0%"
+        ></div>
+      </div>
+
+      <!-- Questions Container -->
+      <div id="quiz-questions"></div>
+
+      <!-- Navigation Buttons -->
+      <div class="quiz-nav">
+        <button
+          class="btn btn-ghost btn-sm"
+          id="btn-back"
+          disabled
+          data-i18n="btn_back"
+        >
+          ← Back
+        </button>
+        <button
+          class="btn btn-primary btn-sm"
+          id="btn-next"
+          data-i18n="btn_next"
+        >
+          Next →
+        </button>
+        <button class="btn btn-primary" id="btn-submit" style="display: none">
+          <span class="btn-text" data-i18n="btn_submit"
+            >Submit &amp; See Results</span
+          >
+          <span class="spinner"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+{% endblock %}

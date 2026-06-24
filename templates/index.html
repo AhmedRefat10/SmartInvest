@@ -1,0 +1,483 @@
+{% extends "base.html" %} {% block title %}SmartInvest — Egyptian Investment
+Platform{% endblock %} {% block content %}
+
+<!-- ── Hero Section ────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div
+      style="
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      "
+    >
+      <div>
+        <div class="hero-badge" data-i18n="hero_badge">
+          🇪🇬 Designed for Egyptian Investors
+        </div>
+        <h1 class="hero-title">
+          <span class="hero-arabic" data-i18n="hero_title_ar">استثمر بذكاء</span
+          ><br />
+          SmartInvest
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero_subtitle">
+          A data-driven investment advisory platform that analyzes your risk
+          profile, builds a portfolio across EGX stocks, gold, and real estate,
+          and simulates your wealth growth over time.
+        </p>
+        <div class="hero-ctas">
+          <a
+            href="/register"
+            class="btn btn-primary btn-lg"
+            data-i18n="hero_cta_start"
+            >Get Started Free</a
+          >
+          <a
+            href="#how-it-works"
+            class="btn btn-secondary btn-lg"
+            data-i18n="hero_cta_learn"
+            >Learn More</a
+          >
+        </div>
+        <div class="hero-points">
+          <span data-i18n="hero_point_1">Weighted risk scorecard</span>
+          <span data-i18n="hero_point_2">Yahoo Finance market data</span>
+          <span data-i18n="hero_point_3">Explainable allocation logic</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-grid">
+          <div class="card" style="padding: 1.25rem; text-align: center">
+            <div style="color: #f5a623; font-size: 2rem; margin-bottom: 0.5rem">
+              📊
+            </div>
+            <div
+              style="
+                font-size: 1.1rem;
+                font-weight: 800;
+                color: #f0f4ff;
+              "
+              data-i18n="hero_card_score"
+            >
+              Portfolio Score
+            </div>
+            <div
+              style="
+                font-size: 2rem;
+                font-weight: 700;
+                color: #f5a623;
+                margin: 0.25rem 0;
+              "
+            >
+              8.4
+            </div>
+            <div
+              style="font-size: 0.78rem; color: #8892a4"
+              data-i18n="hero_card_div"
+            >
+              Diversification Index
+            </div>
+          </div>
+          <div class="card" style="padding: 1.25rem; text-align: center">
+            <div style="color: #10b981; font-size: 2rem; margin-bottom: 0.5rem">
+              📈
+            </div>
+            <div
+              style="
+                font-size: 1.1rem;
+                font-weight: 800;
+                color: #f0f4ff;
+              "
+              data-i18n="hero_card_return"
+            >
+              Expected Return
+            </div>
+            <div
+              style="
+                font-size: 2rem;
+                font-weight: 700;
+                color: #10b981;
+                margin: 0.25rem 0;
+              "
+            >
+              18.5%
+            </div>
+            <div
+              style="font-size: 0.78rem; color: #8892a4"
+              data-i18n="hero_card_return_sub"
+            >
+              Annual (Balanced Profile)
+            </div>
+          </div>
+          <div class="card" style="padding: 1.25rem; text-align: center">
+            <div style="color: #3b82f6; font-size: 2rem; margin-bottom: 0.5rem">
+              🏦
+            </div>
+            <div
+              style="
+                font-size: 1.1rem;
+                font-weight: 800;
+                color: #f0f4ff;
+              "
+              data-i18n="hero_card_risk"
+            >
+              Risk Level
+            </div>
+            <div style="margin: 0.5rem 0">
+              <span class="badge badge-balanced">Balanced</span>
+            </div>
+            <div
+              style="font-size: 0.78rem; color: #8892a4"
+              data-i18n="hero_card_risk_sub"
+            >
+              Score-Based Profile
+            </div>
+          </div>
+          <div class="card" style="padding: 1.25rem; text-align: center">
+            <div style="color: #f5a623; font-size: 2rem; margin-bottom: 0.5rem">
+              🎯
+            </div>
+            <div
+              style="
+                font-size: 1.1rem;
+                font-weight: 800;
+                color: #f0f4ff;
+              "
+              data-i18n="hero_card_growth"
+            >
+              10-Year Growth
+            </div>
+            <div
+              style="
+                font-size: 1.4rem;
+                font-weight: 700;
+                color: #f5a623;
+                margin: 0.25rem 0;
+              "
+            >
+              3.2×
+            </div>
+            <div
+              style="font-size: 0.78rem; color: #8892a4"
+              data-i18n="hero_card_growth_sub"
+            >
+              Average Case Projection
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Project Overview ───────────────────────────────────────── -->
+<section class="explain-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag" data-i18n="overview_tag">Project Idea</div>
+      <h2 data-i18n="overview_title">
+        A clear investment recommendation workflow, not a black box
+      </h2>
+      <p class="section-lead" data-i18n="overview_subtitle">
+        SmartInvest turns a user's profile into a portfolio recommendation that
+        can be explained step by step: risk scoring, market data, ranking,
+        allocation, and simulation.
+      </p>
+    </div>
+    <div class="info-grid">
+      <div class="info-panel">
+        <h3 data-i18n="problem_title">The Problem</h3>
+        <p data-i18n="problem_text">
+          New investors often receive vague advice without understanding why a
+          portfolio fits their capital, risk tolerance, and time horizon.
+        </p>
+      </div>
+      <div class="info-panel">
+        <h3 data-i18n="solution_title">The Solution</h3>
+        <p data-i18n="solution_text">
+          The platform asks structured questions, calculates a weighted risk
+          score, fetches recent market data, and builds a diversified portfolio
+          across stocks, gold, and real-estate exposure.
+        </p>
+      </div>
+      <div class="info-panel">
+        <h3 data-i18n="explainability_title">The Key Value</h3>
+        <p data-i18n="explainability_text">
+          Every output is traceable: why the user is classified, why an asset is
+          selected, why it has a certain weight, and what each metric means.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats Bar ───────────────────────────────────────────────── -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-bar-grid">
+      <div class="stat-bar-item">
+        <div class="stat-bar-num">3</div>
+        <div class="stat-bar-label" data-i18n="stats_bar_asset_classes">
+          Asset Classes
+        </div>
+      </div>
+      <div class="stat-bar-item">
+        <div class="stat-bar-num">15</div>
+        <div class="stat-bar-label" data-i18n="stats_bar_quiz_questions">
+          Risk Assessment Questions
+        </div>
+      </div>
+      <div class="stat-bar-item">
+        <div class="stat-bar-num">10yr</div>
+        <div class="stat-bar-label" data-i18n="stats_bar_simulation">
+          Growth Simulation
+        </div>
+      </div>
+      <div class="stat-bar-item">
+        <div class="stat-bar-num" data-i18n="stats_bar_live">Live</div>
+        <div class="stat-bar-label" data-i18n="stats_bar_data">
+          Yahoo Finance Data
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Methodology Section ────────────────────────────────────── -->
+<section class="methodology-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag" data-i18n="method_tag">Methodology</div>
+      <h2 data-i18n="method_title">How the recommendation is produced</h2>
+      <p class="section-lead" data-i18n="method_subtitle">
+        SmartInvest combines your risk profile, capital size, and recent market
+        data to produce a transparent portfolio recommendation you can
+        understand.
+      </p>
+    </div>
+    <div class="method-grid">
+      <div class="method-step">
+        <div class="method-num">01</div>
+        <div>
+          <h3 data-i18n="method_1_title">Risk Score</h3>
+          <p data-i18n="method_1_text">
+            A weighted quiz gives most importance to behavioral risk tolerance,
+            while financial capacity questions act as secondary adjustments.
+          </p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="method-num">02</div>
+        <div>
+          <h3 data-i18n="method_2_title">Market Universe</h3>
+          <p data-i18n="method_2_text">
+            The app uses EGX30 companies, a gold proxy, and real-estate-sector
+            exposure. Prices and volumes come from Yahoo Finance.
+          </p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="method-num">03</div>
+        <div>
+          <h3 data-i18n="method_3_title">Asset Ranking</h3>
+          <p data-i18n="method_3_text">
+            Assets are ranked using historical return, volatility, Sharpe ratio,
+            liquidity, and correlation filtering.
+          </p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="method-num">04</div>
+        <div>
+          <h3 data-i18n="method_4_title">Capital-Aware Allocation</h3>
+          <p data-i18n="method_4_text">
+            Capital size controls the number of holdings. Risk level controls
+            the mix and how strongly the optimizer tilts toward high-ranked
+            assets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Features Section ───────────────────────────────────────── -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag" data-i18n="features_title">Why SmartInvest?</div>
+      <h2 data-i18n="features_subtitle">
+        Everything you need to invest smarter
+      </h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3 class="feature-title" data-i18n="feature1_title">
+          Psychometric Risk Profiling
+        </h3>
+        <p class="feature-text" data-i18n="feature1_desc">
+          15 behavioral and financial questions score your investor personality
+          using a clear 0–45 scorecard.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h3 class="feature-title" data-i18n="feature2_title">
+          Portfolio Optimization
+        </h3>
+        <p class="feature-text" data-i18n="feature2_desc">
+          Auto-updating market prices are sourced from Yahoo Finance.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3 class="feature-title" data-i18n="feature3_title">
+          Growth Simulation
+        </h3>
+        <p class="feature-text" data-i18n="feature3_desc">
+          Visualize your wealth trajectory over 1–30 years with best, average,
+          and worst-case scenarios.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Metrics Section ────────────────────────────────────────── -->
+<section class="metrics-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag" data-i18n="metrics_tag">Dashboard Outputs</div>
+      <h2 data-i18n="metrics_title">What the user can explain after generation</h2>
+    </div>
+    <div class="metric-list">
+      <div class="metric-item">
+        <strong data-i18n="metric_return_title">Historical Annual Return</strong>
+        <span data-i18n="metric_return_text">
+          Annualized from recent daily price returns.
+        </span>
+      </div>
+      <div class="metric-item">
+        <strong data-i18n="metric_vol_title">Annual Volatility</strong>
+        <span data-i18n="metric_vol_text">
+          Measures how much the portfolio moved historically.
+        </span>
+      </div>
+      <div class="metric-item">
+        <strong data-i18n="metric_sharpe_title">Sharpe Ratio</strong>
+        <span data-i18n="metric_sharpe_text">
+          Shows historical return per unit of risk.
+        </span>
+      </div>
+      <div class="metric-item">
+        <strong data-i18n="metric_div_title">Diversification Score</strong>
+        <span data-i18n="metric_div_text">
+          Uses correlation to show whether selected assets move differently.
+        </span>
+      </div>
+      <div class="metric-item">
+        <strong data-i18n="metric_liq_title">Liquidity Score</strong>
+        <span data-i18n="metric_liq_text">
+          Ranks assets by average trading volume.
+        </span>
+      </div>
+      <div class="metric-item">
+        <strong data-i18n="metric_sim_title">Scenario Simulation</strong>
+        <span data-i18n="metric_sim_text">
+          Projects best, average, worst, and inflation-adjusted outcomes.
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ────────────────────────────────────────────── -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag" data-i18n="steps_title">How It Works</div>
+      <h2 data-i18n="steps_subtitle">Your path to smarter investing</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h4 class="step-title" data-i18n="step1_title">Build Your Profile</h4>
+        <p class="step-text" data-i18n="step1_desc">
+          Enter your capital, investment goal, time horizon, and liquidity
+          preferences.
+        </p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h4 class="step-title" data-i18n="step2_title">Take the Quiz</h4>
+        <p class="step-text" data-i18n="step2_desc">
+          Answer 15 behavioral finance questions scored to classify your risk
+          tolerance.
+        </p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h4 class="step-title" data-i18n="step3_title">Get Your Portfolio</h4>
+        <p class="step-text" data-i18n="step3_desc">
+          Receive a data-driven allocation across EGX stocks, gold, and real
+          estate.
+        </p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h4 class="step-title" data-i18n="step4_title">Simulate & Plan</h4>
+        <p class="step-text" data-i18n="step4_desc">
+          Explore growth scenarios over time, adjust contributions, and plan
+          your financial future.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Limitations Section ────────────────────────────────────── -->
+<section class="limitations-section">
+  <div class="container">
+    <div class="limitations-box">
+      <div>
+        <div class="section-tag" data-i18n="limits_tag">Honest Scope</div>
+        <h2 data-i18n="limits_title">Important platform notes</h2>
+      </div>
+      <ul>
+        <li data-i18n="limit_1">
+          SmartInvest provides data-driven portfolio guidance, not a guaranteed
+          investment outcome.
+        </li>
+        <li data-i18n="limit_2">
+          Yahoo Finance data may be delayed or unavailable for some symbols.
+        </li>
+        <li data-i18n="limit_3">
+          Simulations are planning scenarios, not predictions or guarantees.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA Section ────────────────────────────────────────────── -->
+<section style="padding: 5rem 0; text-align: center">
+  <div class="container">
+    <h2 style="margin-bottom: 1rem" data-i18n="cta_title">
+      Ready to invest smarter?
+    </h2>
+    <p
+      style="color: #8892a4; max-width: 480px; margin: 0 auto 2rem"
+      data-i18n="cta_subtitle"
+    >
+      Use SmartInvest to make clearer data-driven planning decisions.
+    </p>
+    <a href="/register" class="btn btn-primary btn-lg" data-i18n="cta_btn"
+      >Create Free Account</a
+    >
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}SmartInvest{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Cairo:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body>
+    <!-- ── Navbar ──────────────────────────────────────────────────── -->
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <a href="/" class="navbar-brand">
+          <img
+            src="{{ url_for('static', filename='images/logo.svg') }}"
+            alt="SmartInvest Logo"
+            width="32"
+            height="32"
+          />
+          SmartInvest
+        </a>
+        <div class="navbar-links">
+          <a href="/" class="nav-link" data-i18n="nav_home">Home</a>
+          <a
+            href="/dashboard"
+            class="nav-link"
+            id="nav-dashboard"
+            style="display: none"
+            data-i18n="nav_dashboard"
+            >Dashboard</a
+          >
+          <span
+            id="nav-username"
+            style="
+              font-size: 0.875rem;
+              color: #f5a623;
+              font-weight: 500;
+              padding: 0 8px;
+            "
+          ></span>
+          <a href="/login" class="nav-link" id="nav-login" data-i18n="nav_login"
+            >Login</a
+          >
+          <a
+            href="/register"
+            class="btn-nav"
+            id="nav-register"
+            data-i18n="nav_register"
+            >Get Started</a
+          >
+          <div class="settings-menu" id="nav-settings">
+            <button
+              class="btn-nav settings-toggle"
+              type="button"
+              onclick="toggleSettingsMenu()"
+              data-i18n-title="settings_title"
+              aria-label="Settings"
+            >
+              ⚙
+            </button>
+            <div class="settings-dropdown" id="settings-dropdown">
+              <div class="settings-user">
+                <div class="settings-name" id="settings-user-name">User</div>
+                <div class="settings-email" id="settings-user-email"></div>
+              </div>
+              <a href="/account" class="settings-action" data-i18n="settings_edit_profile">
+                Edit Profile
+              </a>
+              <a href="/profile" class="settings-action" data-i18n="settings_investment_profile">
+                Investment Profile
+              </a>
+              <button
+                type="button"
+                class="settings-action"
+                onclick="retakeQuiz()"
+                data-i18n="settings_retake_quiz"
+              >
+                Retake Quiz
+              </button>
+              <button
+                type="button"
+                class="settings-action"
+                onclick="logout()"
+                data-i18n="nav_logout"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+          <button
+            class="btn-lang"
+            id="lang-toggle"
+            onclick="toggleLang()"
+            title="Switch language / تغيير اللغة"
+          >
+            العربية
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ── Loading Overlay ─────────────────────────────────────────── -->
+    <div id="loading-overlay">
+      <div class="loading-spinner-lg"></div>
+      <div>
+        <p id="loading-message" data-i18n="loading_default">Loading…</p>
+        <p id="loading-sub"></p>
+      </div>
+      <div class="loading-steps" id="loading-steps">
+        <div class="loading-step" data-step="0">
+          <span class="step-icon">📡</span>
+          <span data-i18n="loading_step0">Fetching market data</span>
+        </div>
+        <div class="loading-step" data-step="1">
+          <span class="step-icon">📊</span>
+          <span data-i18n="loading_step1">Analyzing risk profile</span>
+        </div>
+        <div class="loading-step" data-step="2">
+          <span class="step-icon">⚙️</span>
+          <span data-i18n="loading_step2">Optimizing portfolio</span>
+        </div>
+        <div class="loading-step" data-step="3">
+          <span class="step-icon">📈</span>
+          <span data-i18n="loading_step3">Running simulation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Page Content ────────────────────────────────────────────── -->
+    <div class="page-wrapper">{% block content %}{% endblock %}</div>
+
+    <!-- ── Footer ─────────────────────────────────────────────────── -->
+    <footer>
+      <span data-i18n="footer"
+        >SmartInvest © 2026 — Quantitative Investment Platform</span
+      >
+    </footer>
+
+    <!-- ── Scripts ────────────────────────────────────────────────── -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="{{ url_for('static', filename='js/i18n.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+  </body>
+</html>
