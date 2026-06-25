@@ -82,7 +82,7 @@ endblock %} {% block content %}
       <!-- Left Column (60%) -->
       <div class="dashboard-left">
         <!-- Allocation Doughnut Chart -->
-        <div class="card">
+        <div class="card dashboard-allocation-card">
           <div class="card-title" data-i18n="chart_allocation">
             Portfolio Allocation
           </div>
@@ -108,13 +108,48 @@ endblock %} {% block content %}
             <div id="allocation-legend"></div>
           </div>
         </div>
+
+        <!-- Scenario Projection Chart -->
+        <div class="card dashboard-scenario-card">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 1rem;
+              padding-bottom: 0.75rem;
+              border-bottom: 1px solid #1e2d45;
+            "
+          >
+            <div>
+              <div
+                style="
+                  font-family: 'Playfair Display', serif;
+                  font-size: 1.1rem;
+                "
+                data-i18n="chart_growth"
+              >
+                Growth Simulation
+              </div>
+              <div
+                style="font-size: 0.8rem; color: #8892a4; margin-top: 2px"
+                data-i18n="chart_growth_sub"
+              >
+                Simple best / average / worst compounding scenarios
+              </div>
+            </div>
+          </div>
+          <div style="height: 280px">
+            <canvas id="simulation-chart"></canvas>
+          </div>
+        </div>
       </div>
       <!-- /dashboard-left -->
 
       <!-- Right Column (40%) -->
       <div class="dashboard-right">
         <!-- Risk Breakdown -->
-        <div class="card">
+        <div class="card dashboard-risk-card">
           <div class="card-title" data-i18n="risk_title">Risk Breakdown</div>
           <div class="risk-metric">
             <span>
@@ -176,7 +211,7 @@ endblock %} {% block content %}
         </div>
 
         <!-- Asset Type Breakdown Chart -->
-        <div class="card">
+        <div class="card dashboard-asset-card">
           <div class="card-title" data-i18n="asset_type_title">
             Asset Class Weights
           </div>
@@ -186,7 +221,7 @@ endblock %} {% block content %}
         </div>
 
         <!-- Simulation Controls -->
-        <div class="card">
+        <div class="card dashboard-controls-card">
           <div class="card-title" data-i18n="sim_title">
             Simulation Controls
           </div>
@@ -278,40 +313,6 @@ endblock %} {% block content %}
           </div>
         </div>
 
-        <!-- Scenario Projection Chart -->
-        <div class="card">
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin-bottom: 1rem;
-              padding-bottom: 0.75rem;
-              border-bottom: 1px solid #1e2d45;
-            "
-          >
-            <div>
-              <div
-                style="
-                  font-family: 'Playfair Display', serif;
-                  font-size: 1.1rem;
-                "
-                data-i18n="chart_growth"
-              >
-                Growth Simulation
-              </div>
-              <div
-                style="font-size: 0.8rem; color: #8892a4; margin-top: 2px"
-                data-i18n="chart_growth_sub"
-              >
-                Simple best / average / worst compounding scenarios
-              </div>
-            </div>
-          </div>
-          <div style="height: 280px">
-            <canvas id="simulation-chart"></canvas>
-          </div>
-        </div>
       </div>
       <!-- /dashboard-right -->
     </div>

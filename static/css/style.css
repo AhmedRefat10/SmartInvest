@@ -145,9 +145,11 @@ p {
   pointer-events: none;
   transition: opacity var(--transition);
   white-space: normal;
+  display: none;
 }
 .info-tooltip:hover::after,
 .info-tooltip:focus::after {
+  display: block;
   opacity: 1;
 }
 th .info-tooltip::after {
@@ -644,7 +646,7 @@ input[type='range']::-webkit-slider-thumb:hover {
 /* ── Dashboard Layout ─────────────────────────────────────────── */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   gap: 1.25rem;
   margin-bottom: 1.25rem;
 }
@@ -1618,6 +1620,25 @@ footer {
   }
   #dashboard-content {
     padding: 1.25rem 0 2.5rem !important;
+  }
+  .dashboard-left,
+  .dashboard-right {
+    display: contents;
+  }
+  .dashboard-allocation-card {
+    order: 1;
+  }
+  .dashboard-risk-card {
+    order: 2;
+  }
+  .dashboard-asset-card {
+    order: 3;
+  }
+  .dashboard-controls-card {
+    order: 4;
+  }
+  .dashboard-scenario-card {
+    order: 5;
   }
   .dashboard-grid,
   .dashboard-left,
